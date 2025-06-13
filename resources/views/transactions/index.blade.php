@@ -3,9 +3,11 @@
 @section('content')
 <style>
     body {
-        background-color: #29293d !important;
-        margin: 0;
+        background-color: #1e1e2f !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #f5f5f5;
     }
 
     header {
@@ -17,13 +19,13 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    header .logo {
+    .logo {
         color: white;
         font-weight: bold;
         font-size: 1.5rem;
     }
 
-    header .logo span {
+    .logo span {
         color: #60f7d3;
     }
 
@@ -34,10 +36,11 @@
     }
 
     nav a {
-        color:#ffffff;
+        color: #ffffff;
         text-decoration: none;
         font-weight: 500;
         transition: color 0.3s;
+        padding-bottom: 2px;
     }
 
     nav a:hover {
@@ -65,22 +68,9 @@
         background-color: #dc2626;
     }
 
-    .page-header {
-        max-width: 1100px;
-        margin: 30px auto 0 auto;
-        padding: 20px 30px;
-        background: #181824;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        color: #aefce3;
-        font-size: 1.2rem;
-        font-weight: 600;
-        text-align: center;
-    }
-
     .container {
         max-width: 1100px;
-        margin: 20px auto 50px auto;
+        margin: 40px auto;
         padding: 30px;
         background: #29293d;
         border-radius: 16px;
@@ -91,6 +81,7 @@
         font-size: 2rem;
         color: #60f7d3;
         margin-bottom: 30px;
+        text-align: center;
     }
 
     a.button {
@@ -111,14 +102,6 @@
         background-color: #60f7d3;
         color: #1e1e2f;
         transform: translateY(-1px);
-    }
-
-    p {
-        background-color: #2e2e40;
-        padding: 12px 16px;
-        border-radius: 6px;
-        color: #aefce3;
-        margin-top: 15px;
     }
 
     table {
@@ -184,6 +167,14 @@
     .actions form {
         display: inline;
     }
+
+    p {
+        background-color: #2e2e40;
+        padding: 12px 16px;
+        border-radius: 6px;
+        color: #aefce3;
+        margin-top: 15px;
+    }
 </style>
 
 <header>
@@ -193,7 +184,6 @@
         <a href="{{ route('transactions.index') }}" class="active">Įrašai</a>
         <a href="{{ route('categories.index') }}">Kategorijos</a>
         <a href="{{ route('reports.index') }}">Ataskaitos</a>
-
         @auth
         <form method="POST" action="{{ route('logout') }}" class="inline">
             @csrf
@@ -202,10 +192,6 @@
         @endauth
     </nav>
 </header>
-
-<div class="page-header">
-    Tvarkykite visus savo įrašus – pajamas ir išlaidas vienoje vietoje
-</div>
 
 <div class="container">
     <h1>Pajamų ir išlaidų įrašai</h1>

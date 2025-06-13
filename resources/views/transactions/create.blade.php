@@ -1,76 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
-<style>
-    body {
-        background-color: #1e1e2f;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 30px;
-        background: #29293d;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
-
-    h1 {
-        text-align: center;
-        font-size: 2rem;
-        color: #60f7d3;
-        margin-bottom: 30px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #aefce3;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    select {
-        width: 100%;
-        padding: 12px 15px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        border: none;
-        background-color: #1e1e2f;
-        color: #f5f5f5;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-        font-size: 1rem;
-    }
-
-    input::placeholder {
-        color: #999;
-    }
-
-    button {
-        background-color: #60f7d3;
-        color: #1e1e2f;
-        padding: 12px 20px;
-        font-size: 1rem;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #4be0c1;
-    }
-</style>
-
 <div class="container">
     <h1>Naujas įrašas</h1>
+
+    <a href="{{ route('transactions.index') }}" class="back-button">
+        ← Grįžti į įrašų sąrašą
+    </a>
 
     <form action="{{ route('transactions.store') }}" method="POST">
         @csrf
@@ -91,7 +24,91 @@
         <label for="description">Aprašymas:</label>
         <input type="text" name="description" id="description" placeholder="Pvz. gauta alga">
 
-        <button type="submit">💾 Išsaugoti</button>
+        <button type="submit" class="save-button">💾 Išsaugoti</button>
     </form>
 </div>
-@endsection
+
+<style>
+    body {
+        background-color: #1e1e2f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #f5f5f5;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 40px;
+        background: #29293d;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #60f7d3;
+        margin-bottom: 30px;
+    }
+
+    .back-button {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 16px;
+        background-color: #1e1e2f;
+        color: #60f7d3;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #60f7d3;
+        color: #1e1e2f;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #aefce3;
+        margin-top: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        background-color: #1e1e2f;
+        color: #f5f5f5;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+        margin-bottom: 15px;
+        font-size: 1rem;
+    }
+
+    input::placeholder {
+        color: #999;
+    }
+
+    .save-button {
+        display: inline-block;
+        width: 100%;
+        background-color: #60f7d3;
+        color: #1e1e2f;
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .save-button:hover {
+        background-color: #4be0c1;
+    }
+</style>
