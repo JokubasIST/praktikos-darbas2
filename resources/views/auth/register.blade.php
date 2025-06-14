@@ -1,8 +1,90 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <style>
+        body {
+            background-color: #1e1e2f !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f5f5f5;
+        }
+
+        .auth-card {
+            max-width: 450px;
+            margin: 50px auto;
+            background-color: #29293d;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            color: #aefce3;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #f5f5f5; /* <-- Pakeista iš #1e1e2f */
+            color: #1e1e2f; /* <-- Juodas tekstas */
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #60f7d3;
+        }
+
+        .btn {
+            background-color: #60f7d3;
+            color: #1e1e2f;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #4be0c1;
+        }
+
+        a {
+            color: #60f7d3;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .terms {
+            color: #aefce3;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .logo-slot {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo-slot span {
+            color: #60f7d3;
+        }
+    </style>
+
+    <div class="auth-card">
+        <div class="logo-slot">
+            Finansai<span>App</span>
+        </div>
 
         <x-validation-errors class="mb-4" />
 
@@ -10,51 +92,41 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <label for="name">{{ __('Vardas') }}</label>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <div>
+                <label for="email">{{ __('El. paštas') }}</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div>
+                <label for="password">{{ __('Slaptažodis') }}</label>
+                <input id="password" type="password" name="password" required autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <div>
+                <label for="password_confirmation">{{ __('Pakartokite slaptažodį') }}</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
+                <div class="terms">
+                    <label for="terms">
+                        <input type="checkbox" name="terms" id="terms" required>
+                        {!! __('Sutinku su :terms ir :privacy', [
+                            'terms' => '<a href="'.route('terms.show').'" target="_blank">naudojimo taisyklėmis</a>',
+                            'privacy' => '<a href="'.route('policy.show').'" target="_blank">privatumo politika</a>',
+                        ]) !!}
+                    </label>
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
+            <div class="flex items-center justify-between mt-4">
+                <a href="{{ route('login') }}">{{ __('Jau turite paskyrą?') }}</a>
+                <button type="submit" class="btn">{{ __('Registruotis') }}</button>
             </div>
         </form>
-    </x-authentication-card>
+    </div>
 </x-guest-layout>

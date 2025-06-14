@@ -3,7 +3,7 @@
 @section('content')
 <style>
     body {
-        background-color: #1e1e2f;
+        background-color: #0f0f2d;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #f5f5f5;
         margin: 0;
@@ -14,7 +14,7 @@
         max-width: 600px;
         margin: 50px auto;
         padding: 30px;
-        background: #29293d;
+        background: #1b1b2e;
         border-radius: 16px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
@@ -24,6 +24,22 @@
         font-size: 2rem;
         color: #60f7d3;
         margin-bottom: 30px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        background-color: #1e1e2f;
+        color: #60f7d3;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: #2a2a40;
     }
 
     label {
@@ -59,15 +75,17 @@
         border-radius: 8px;
         cursor: pointer;
         transition: background 0.3s ease;
+        width: 100%;
     }
 
     button:hover {
         background-color: #4be0c1;
     }
-
 </style>
 
 <div class="container">
+    <a href="{{ route('categories.index') }}" class="back-link">← Grįžti į kategoriją</a>
+
     <h1>Nauja kategorija</h1>
 
     <form action="{{ route('categories.store') }}" method="POST">

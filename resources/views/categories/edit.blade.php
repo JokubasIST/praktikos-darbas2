@@ -26,6 +26,22 @@
         margin-bottom: 30px;
     }
 
+    .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        background-color: #1e1e2f;
+        color: #60f7d3;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: #2a2a40;
+    }
+
     label {
         display: block;
         margin-bottom: 8px;
@@ -64,10 +80,11 @@
     button:hover {
         background-color: #4be0c1;
     }
-
 </style>
 
 <div class="container">
+    <a href="{{ route('categories.index') }}" class="back-link">← Grįžti į kategorijas</a>
+
     <h1>Redaguoti kategoriją</h1>
 
     <form action="{{ route('categories.update', $category) }}" method="POST">
